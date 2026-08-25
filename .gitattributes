@@ -1,0 +1,5 @@
+# The React UMD builds are pinned by SRI hashes in the <script integrity="..."> tags on
+# both pages. Any line-ending conversion changes their bytes, the hash check fails, the
+# browser refuses to execute them, and the site renders blank. Never convert them.
+_ds/react.production.min.js     -text
+_ds/react-dom.production.min.js -text
