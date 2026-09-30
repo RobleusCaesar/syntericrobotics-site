@@ -179,7 +179,7 @@ class Component extends DCLogic {
           })
           .catch(() => this.setState({ sending: false, error: "COULDN’T SEND. CHECK YOUR CONNECTION AND TRY AGAIN." }));
       },
-      markets: ['WATER', 'MOLD', 'FIRE', 'INSPECTION'].map(label => {
+      markets: ['WATER DAMAGE', 'MOLD', 'FIRE DAMAGE', 'HOME INSPECTION'].map(label => {
         const on = picked.includes(label);
         return {
           label,
