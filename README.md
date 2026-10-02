@@ -2,7 +2,7 @@
 
 Static marketing site for Synteric Robotics. No build step, no bundler, no CI.
 
-**Live:** https://robleuscaesar.github.io/syntericrobotics-site/
+**Live:** https://syntericrobotics.com/ (the old `robleuscaesar.github.io/syntericrobotics-site/` URL now 301s here)
 
 ## Deploy
 
@@ -63,11 +63,11 @@ with React. Consequences worth knowing:
 
 - **Relative asset paths only.** `./img/x.webp` from the root page, `../img/x.webp` from
   `/request-access/`. Never root-absolute `/img/x.webp`. The site lives at the subpath
-  `/syntericrobotics-site/` today and moves to the domain root in Phase 3 — root-absolute
+  `/syntericrobotics-site/` and now lives at the domain root — root-absolute
   paths work at exactly one of those and silently 404 at the other.
   - The **only** intentional absolute URLs are `og:url` and `og:image`, because OG
     crawlers do not reliably resolve relative URLs. Both are flagged in-file and must be
-    updated in Phase 3.
+    updated whenever the canonical domain changes.
 - **No build step.** Files are committed exactly as served.
 - **`.nojekyll` stays at root.** Without it Jekyll ignores any path starting with an
   underscore — which would silently delete the entire `_ds/` directory, including React.
@@ -115,14 +115,26 @@ files were byte-identical duplicates of `img/` and unreferenced. `image-slot.js`
 nav gained a `max-width: 599px` rule because the four-item nav overflowed a 375px viewport
 and clipped the REQUEST ACCESS CTA to zero visible pixels.
 
-### Phase 3 — Custom domain (`syntericrobotics.com`) — on Rob's go-ahead only
+### Phase 3 — Custom domain (done)
 
-1. Add a `CNAME` file at repo root containing exactly `syntericrobotics.com`.
-2. DNS at the registrar:
-   - Apex `@` → four A records: `185.199.108.153`, `185.199.109.153`,
-     `185.199.110.153`, `185.199.111.153`.
-   - `www` → CNAME to `robleuscaesar.github.io`.
-3. Settings → Pages: set the custom domain, wait for the DNS check, then tick
-   **Enforce HTTPS** (certificate issuance can take up to ~24h).
-4. **Update `og:url` and `og:image` in both pages** to the new domain — they are absolute
-   and will otherwise keep pointing at the github.io URL.
+Cut over to `syntericrobotics.com` — `CNAME` added in `74da45f`, DNS configured, HTTPS
+enforced, domain state verified. `www` and the old `robleuscaesar.github.io/...` URL both
+redirect to the apex. The absolute `og:url` / `og:image` tags were repointed to the new
+domain afterwards.
+
+The relative-path convention did its job: the move from the `/syntericrobotics-site/`
+subpath to the domain root needed **zero** path edits.
+
+## Maintenance
+
+**The files in this repo are the source of truth.** They began as a Claude Design export
+(`Synteric Landing.dc.html` / `Synteric Request Access.dc.html` in Rob's Downloads) that was
+transformed once on import — paths rewritten, pages split, form wired, nav breakpoint added.
+That transform was a one-shot. Edit the files here directly; do not regenerate from the
+export, or every change since import is lost.
+
+### Outstanding
+
+- **FormSubmit recipient alias.** The form still posts to the plain address rather than the
+  random alias FormSubmit issues after activation, so the address is readable in deployed
+  page source. Swap it in `request-access/index.html` and push.
