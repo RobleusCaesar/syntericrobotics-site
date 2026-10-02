@@ -33,7 +33,7 @@ _ds/
   react.production.min.js      Self-hosted React 18.3.1 UMD
   react-dom.production.min.js  Self-hosted ReactDOM 18.3.1 UMD
   industry-411e43cb.../        Exported design system (styles.css, bundle, manifest)
-img/                           6 WebP page images + og-card.jpg (social preview)
+img/                           7 WebP page images + og-card.jpg (social preview)
 favicon.svg, favicon-32.png    Site mark
 .nojekyll                      Serve files verbatim (see below)
 ```
