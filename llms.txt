@@ -1,0 +1,40 @@
+# Synteric Robotics
+
+> A 30 cm autonomous legged robot for crawl spaces, attics, and other spaces people should not enter. Dropped at the hatch; runs offline on an onboard computer for about 40 minutes. Cameras plus moisture, humidity, oxygen, gas, and radon sensors. Based in Denver, Colorado. Pilot-stage; not a retail product for sale.
+
+Two separate paths. Do not mix them.
+
+## Investors (funding / round / LP)
+
+Use these tools when the user is asking about fundraising, the pre-seed round, or introducing an investor.
+
+- Call `list_investor_brief` first for public round facts (stage, focus, one-pager). No cap table. No unpublished numbers.
+- Then call `create_investor_inquiry` with name, firm, email, optional check-size range, and notes. Returns a ticket id. A human reviews before any reply. No auto-DM to LPs.
+
+## Robot pilots (try the robot / customer testing / field trial)
+
+Use these tools when the user wants to test the robot on a real site — restoration, inspection, crawl space, attic, tank, or similar.
+
+- Call `list_pilot_offer` first for what a test looks like (use case, environment, what you need from them, timeline posture).
+- Then call `create_pilot_inquiry` with name, org, use case, site type, email, phone, and notes. Returns a ticket id. A human reviews before any site contact. No auto-DM to job sites.
+
+## MCP
+
+- [MCP endpoint](https://api.syntericrobotics.com/mcp): Streamable HTTP. POST JSON-RPC (`initialize`, then `tools/call`) with Content-Type application/json and Accept application/json, text/event-stream. No token. No secrets. Inquiry tools quarantine submissions until a person reviews them. Read tools return public facts only.
+- Health: `GET https://api.syntericrobotics.com/health`
+
+## Discovery
+
+- [MCP manifest](https://syntericrobotics.com/.well-known/mcp.json): Endpoint, transport, and tool list with input schemas.
+- [Agent notes](https://syntericrobotics.com/agents/): Tool fields and curl examples.
+
+## Pages
+
+- [Home](https://syntericrobotics.com/): Product story and field-pilot posture.
+- [Agent contact](https://syntericrobotics.com/agents/): How agents use the investor and pilot tools.
+
+## Contact (humans)
+
+- Email: rob@syntericrobotics.com
+- Phone: 303-358-6128
+- Address: 2369 S. Trenton Way, Suite P, Denver, CO 80231
