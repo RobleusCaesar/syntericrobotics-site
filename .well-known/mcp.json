@@ -1,0 +1,144 @@
+{
+  "name": "synteric-investor-pilot",
+  "title": "Synteric Robotics",
+  "version": "1.0.0",
+  "description": "Synteric Robotics. Public investor brief and pilot offer, plus quarantined contact inquiries. No token. No payment. No cap table. No auto-DM.",
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://api.syntericrobotics.com/mcp",
+    "endpoint": "https://api.syntericrobotics.com/mcp"
+  },
+  "url": "https://api.syntericrobotics.com/mcp",
+  "authentication": {
+    "required": false
+  },
+  "documentation": "https://syntericrobotics.com/agents/",
+  "website": "https://syntericrobotics.com",
+  "health": "https://api.syntericrobotics.com/health",
+  "tools": [
+    {
+      "name": "list_investor_brief",
+      "description": "Public pre-seed round facts only: stage, focus, one-pager URL, and how to inquire. No cap table. No unpublished numbers. No dollar targets. Read-only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "list_pilot_offer",
+      "description": "What a Synteric field pilot / customer test looks like: use cases, environments, what you provide, timeline posture, and how to inquire. Not a purchase. Read-only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "create_investor_inquiry",
+      "description": "Submit an investor contact. Opens a QUARANTINED ticket tagged investor (not a commitment). A human reviews before any reply. No auto-DM to LPs. Required: name, firm, email. Optional: check_size_range, notes. Honeypot company_website must be empty or omitted. Returns an idempotent ticket id (SYN-INV-…). Re-submitting the same firm+email within the idempotency window returns the same ticket id. Rate-limited. No payment.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["name", "firm", "email"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Investor or partner contact name."
+          },
+          "firm": {
+            "type": "string",
+            "description": "Fund, family office, or firm name."
+          },
+          "email": {
+            "type": "string",
+            "description": "Work email for follow-up after human review."
+          },
+          "check_size_range": {
+            "type": "string",
+            "description": "Optional. Self-reported check range, e.g. 50k-150k. Not a term sheet."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional context: thesis fit, intro source, timing."
+          },
+          "company_website": {
+            "type": "string",
+            "description": "Honeypot. Must be empty or omitted."
+          },
+          "idempotency_key": {
+            "type": "string",
+            "description": "Optional client key. Same key returns the same ticket id."
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "create_pilot_inquiry",
+      "description": "Submit a robot pilot / customer-test contact. Opens a QUARANTINED ticket tagged pilot (not a booking and not a sale). A human reviews before any site contact. No auto-DM to job sites. Required: name, org, use_case, site_type, email, phone. Optional: notes. Honeypot company_website must be empty or omitted. Returns an idempotent ticket id (SYN-PIL-…). Re-submitting the same org+email+site_type within the idempotency window returns the same ticket id. Rate-limited. No payment. No calendar hold.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["name", "org", "use_case", "site_type", "email", "phone"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Operator or site contact name."
+          },
+          "org": {
+            "type": "string",
+            "description": "Company or organization (e.g. restoration franchise, inspector, facility owner)."
+          },
+          "use_case": {
+            "type": "string",
+            "description": "What you want the robot to do on site."
+          },
+          "site_type": {
+            "type": "string",
+            "description": "Environment class, e.g. crawl_space, attic, fire_scene, above_ground_storage_tank, other."
+          },
+          "email": {
+            "type": "string",
+            "description": "Work email for follow-up after human review."
+          },
+          "phone": {
+            "type": "string",
+            "description": "US phone for scheduling after human review."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional: location region, hatch size, timeline, hazards."
+          },
+          "company_website": {
+            "type": "string",
+            "description": "Honeypot. Must be empty or omitted."
+          },
+          "idempotency_key": {
+            "type": "string",
+            "description": "Optional client key. Same key returns the same ticket id."
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    }
+  ]
+}

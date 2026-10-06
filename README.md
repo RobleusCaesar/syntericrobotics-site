@@ -28,6 +28,9 @@ gh api repos/RobleusCaesar/syntericrobotics-site/pages/builds/latest --jq '.stat
 ```
 index.html                     Landing page          -> /
 request-access/index.html      Pilot request form    -> /request-access/
+llms.txt                       Agent discovery brief -> /llms.txt
+.well-known/mcp.json           MCP manifest          -> /.well-known/mcp.json
+agents/index.html              Agent contact         -> /agents/
 support.js                     Claude Design runtime (generated — do not edit)
 _ds/
   react.production.min.js      Self-hosted React 18.3.1 UMD
@@ -37,6 +40,8 @@ img/                           7 WebP page images + og-card.jpg (social preview)
 favicon.svg, favicon-32.png    Site mark
 .nojekyll                      Serve files verbatim (see below)
 ```
+
+Agent discovery paths: `/llms.txt`, `/.well-known/mcp.json`, and `/agents/`.
 
 ## How the pages work
 
