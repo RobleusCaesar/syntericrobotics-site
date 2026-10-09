@@ -31,6 +31,8 @@ request-access/index.html      Pilot request form    -> /request-access/
 llms.txt                       Agent discovery brief -> /llms.txt
 .well-known/mcp.json           MCP manifest          -> /.well-known/mcp.json
 agents/index.html              Agent contact         -> /agents/
+careers/index.html             Open roles            -> /careers/
+careers/<slug>/index.html      One page per posting  -> /careers/<slug>/
 support.js                     Claude Design runtime (generated — do not edit)
 _ds/
   react.production.min.js      Self-hosted React 18.3.1 UMD
@@ -90,6 +92,15 @@ with React. Consequences worth knowing:
 - Success is FormSubmit's JSON `success: "true"` (a *string*, not a boolean). Anything
   else shows the error state and leaves the form up for retry.
 - Double-submit is guarded by a `sending` flag.
+
+### Careers
+
+`/careers/` renders its list from the `ROLES` array in `careers/index.html`. To add a
+role: append one entry there (`title`, `tag`, `slug`) and create
+`careers/<slug>/index.html` by copying an existing posting. Each posting's apply form
+posts to the same FormSubmit endpoint with its own `_subject`, a `role` field, and an
+empty `_honey` honeypot (FormSubmit discards submissions where it's filled). The
+footer CAREERS link is on every page; it is deliberately not in the header nav.
 
 ### Activation status
 
