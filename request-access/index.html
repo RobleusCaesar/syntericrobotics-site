@@ -166,7 +166,7 @@ class Component extends DCLogic {
         // MARKETS are component state, not inputs -- they will not serialize on their own.
         payload.markets = this.state.picked.join(", ");
         this.setState({ sending: true, error: null });
-        fetch("https://formsubmit.co/ajax/rob@frostrivercapital.com", {
+        fetch("https://formsubmit.co/ajax/rob@syntericrobotics.com", {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify(payload)

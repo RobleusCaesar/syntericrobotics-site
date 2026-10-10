@@ -104,9 +104,9 @@ input::placeholder, textarea::placeholder { color:#5B6471; }
     </ul>
     <h2 style="font-family:Archivo;font-weight:600;font-size:clamp(20px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:#F4F3F0;margin:clamp(44px,5vw,64px) 0 16px">Details</h2>
     <ul style="list-style:none;margin:0;padding:0;display:grid;gap:12px;max-width:62ch">
-      <li style="font-family:Archivo;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#AEB4BD;position:relative;padding-left:22px"><i style="position:absolute;left:0;top:0.82em;width:8px;height:1px;background:#5B6471"></i>Contract, [hours/week], starting November 2026</li>
+      <li style="font-family:Archivo;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#AEB4BD;position:relative;padding-left:22px"><i style="position:absolute;left:0;top:0.82em;width:8px;height:1px;background:#5B6471"></i>Contract, 40 hours/week, starting November 2026</li>
       <li style="font-family:Archivo;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#AEB4BD;position:relative;padding-left:22px"><i style="position:absolute;left:0;top:0.82em;width:8px;height:1px;background:#5B6471"></i>Grad students, postdocs and recent grads are welcome</li>
-      <li style="font-family:Archivo;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#AEB4BD;position:relative;padding-left:22px"><i style="position:absolute;left:0;top:0.82em;width:8px;height:1px;background:#5B6471"></i>Rate: [range or “competitive, based on experience”]</li>
+      <li style="font-family:Archivo;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#AEB4BD;position:relative;padding-left:22px"><i style="position:absolute;left:0;top:0.82em;width:8px;height:1px;background:#5B6471"></i>Rate: $50–$90/hour, based on experience</li>
     </ul>
     <h2 style="font-family:Archivo;font-weight:600;font-size:clamp(20px,2vw,26px);line-height:1.2;letter-spacing:-0.02em;color:#F4F3F0;margin:clamp(44px,5vw,64px) 0 16px">To apply</h2>
     <p style="font-family:Archivo;font-size:clamp(15px,1.3vw,18px);line-height:1.65;color:#AEB4BD;margin:0 0 16px;max-width:62ch;text-wrap:pretty">Send a short note and a link to something you’ve built that walks (video, paper or repo) to <a href="mailto:rob@syntericrobotics.com" style="color:#F4F3F0;border-bottom:1px solid #2D54F0">rob@syntericrobotics.com</a>.</p>
@@ -181,7 +181,7 @@ class Component extends DCLogic {
         const payload = { _subject: "Synteric application: Legged Locomotion", role: ROLE };
         new FormData(form).forEach((v, k) => { payload[k] = v; });
         this.setState({ sending: true, error: null });
-        fetch("https://formsubmit.co/ajax/rob@frostrivercapital.com", {
+        fetch("https://formsubmit.co/ajax/rob@syntericrobotics.com", {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify(payload)

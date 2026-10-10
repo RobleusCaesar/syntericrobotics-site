@@ -151,6 +151,9 @@ export, or every change since import is lost.
 
 ### Outstanding
 
+- **FormSubmit activation for `rob@syntericrobotics.com`.** Both forms (request-access and
+  the careers posting) moved to this address. FormSubmit treats it as new: the first
+  submission only triggers a confirmation email to that inbox. Click the link, then resubmit.
 - **FormSubmit recipient alias.** The form still posts to the plain address rather than the
   random alias FormSubmit issues after activation, so the address is readable in deployed
   page source. Swap it in `request-access/index.html` and push.
