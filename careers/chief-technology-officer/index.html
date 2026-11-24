@@ -39,6 +39,11 @@ a:hover { color:#2D54F0; }
 input, textarea, button { font-family:inherit; }
 input:focus-visible, textarea:focus-visible, button:focus-visible { outline:1px solid #2D54F0; outline-offset:2px; }
 input::placeholder, textarea::placeholder { color:#5B6471; }
+input[type="file"] { width:100%; max-width:100%; color:#AEB4BD; font-size:16px; color-scheme:dark; }
+input[type="file"]::file-selector-button,
+input[type="file"]::-webkit-file-upload-button { font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.16em; color:#F4F3F0; background:transparent; border:1px solid #20242B; padding:12px 16px; margin-right:14px; cursor:pointer; }
+input[type="file"]::file-selector-button:hover,
+input[type="file"]::-webkit-file-upload-button:hover { border-color:#2D54F0; color:#2D54F0; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
 </style>
 </helmet>
@@ -117,42 +122,37 @@ input::placeholder, textarea::placeholder { color:#5B6471; }
     <section id="apply" style="position:relative;margin-top:clamp(64px,8vw,104px);border-top:1px solid #20242B;padding-top:clamp(36px,4vw,52px)">
       <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.24em;color:#5B6471;margin:0">APPLY</p>
 
-      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
-        <div style="margin-top:32px;display:flex;align-items:center;gap:12px">
-          <span style="width:6px;height:6px;background:#E0A23A;border-radius:50%"></span>
-          <p style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.2em;color:#F4F3F0;margin:0">RECEIVED. WE'LL BE IN TOUCH.</p>
+      <form method="POST" action="https://formsubmit.co/rob@syntericrobotics.com" enctype="multipart/form-data" onSubmit="{{ submit }}" style="margin-top:32px;display:grid;gap:30px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px">
+          <label style="display:grid;gap:10px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">NAME</span>
+            <input name="name" type="text" autocomplete="name" required="required" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#F4F3F0;font-size:16px;padding:10px 0;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
+          </label>
+          <label style="display:grid;gap:10px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">EMAIL</span>
+            <input name="email" type="email" autocomplete="email" required="required" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#F4F3F0;font-size:16px;padding:10px 0;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
+          </label>
         </div>
-      </sc-if>
-
-      <sc-if value="{{ open }}" hint-placeholder-val="{{ true }}">
-        <form onSubmit="{{ submit }}" style="margin-top:32px;display:grid;gap:30px">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px">
-            <label style="display:grid;gap:10px">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">NAME</span>
-              <input name="name" type="text" autocomplete="name" required="required" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#F4F3F0;font-size:16px;padding:10px 0;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
-            </label>
-            <label style="display:grid;gap:10px">
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">EMAIL</span>
-              <input name="email" type="email" autocomplete="email" required="required" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#F4F3F0;font-size:16px;padding:10px 0;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
-            </label>
-          </div>
-          <label style="display:grid;gap:10px">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">LINKEDIN / PORTFOLIO / GITHUB URL</span>
-            <input name="link" type="url" placeholder="https://" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#F4F3F0;font-size:16px;padding:10px 0;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
-          </label>
-          <label style="display:grid;gap:10px">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">ANYTHING WE SHOULD KNOW?</span>
-            <textarea name="notes" rows="5" style="background:transparent;border:1px solid #20242B;color:#F4F3F0;font-size:16px;line-height:1.6;padding:14px;resize:vertical;transition:border-color 200ms ease" style-focus="border:1px solid #2D54F0"></textarea>
-          </label>
-          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-          <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:6px">
-            <button type="submit" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.2em;white-space:nowrap;background:#2D54F0;color:#F4F3F0;border:1px solid #2D54F0;padding:16px 28px;cursor:pointer;transition:background 200ms ease" style-hover="background:#0E1116;color:#F4F3F0">SUBMIT</button>
-          </div>
-          <sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
-            <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;line-height:1.7;color:#E0A23A;margin:0">{{ errorText }}</p>
-          </sc-if>
-        </form>
-      </sc-if>
+        <label style="display:grid;gap:10px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">RESUME (PDF OR WORD)</span>
+          <input name="attachment" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required="required" aria-describedby="resume-hint" onChange="{{ onResume }}" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#AEB4BD;font-size:16px;padding:10px 0;width:100%;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
+          <span id="resume-hint" style="font-family:Archivo;font-size:13px;line-height:1.5;color:#5B6471">Required. PDF, DOC, or DOCX. 10 MB maximum.</span>
+        </label>
+        <label style="display:grid;gap:12px">
+          <span style="font-family:Archivo;font-weight:600;font-size:clamp(18px,2vw,22px);line-height:1.35;letter-spacing:-0.02em;color:#F4F3F0;text-wrap:pretty">Tell us about yourself and what you've built</span>
+          <textarea name="notes" rows="8" required="required" onInput="{{ onNotes }}" placeholder="A short note on your background and something you've shipped." style="background:transparent;border:1px solid #20242B;color:#F4F3F0;font-size:16px;line-height:1.6;padding:14px;resize:vertical;min-height:200px;transition:border-color 200ms ease" style-focus="border:1px solid #2D54F0"></textarea>
+        </label>
+        <label style="display:grid;gap:10px">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:#5B6471">LINKEDIN / PORTFOLIO / GITHUB URL</span>
+          <input name="link" type="url" placeholder="https://" style="background:transparent;border:0;border-bottom:1px solid #20242B;color:#F4F3F0;font-size:16px;padding:10px 0;transition:border-color 200ms ease" style-focus="border-bottom:1px solid #2D54F0">
+        </label>
+        <input type="hidden" name="_subject" value="Synteric application: CTO">
+        <input type="hidden" name="role" value="Chief Technology Officer">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:6px">
+          <button type="submit" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.2em;white-space:nowrap;background:#2D54F0;color:#F4F3F0;border:1px solid #2D54F0;padding:16px 28px;cursor:pointer;transition:background 200ms ease" style-hover="background:#0E1116;color:#F4F3F0">SUBMIT</button>
+        </div>
+      </form>
     </section>
   </main>
 
@@ -166,35 +166,49 @@ input::placeholder, textarea::placeholder { color:#5B6471; }
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
-const ROLE = 'Chief Technology Officer';
+// Resumes must be multipart/form-data. FormSubmit documents that as a normal
+// form POST (enctype, file field name="attachment", 10 MB combined). The AJAX
+// JSON endpoint cannot carry the file, so a valid form submits natively.
+// Same recipient. No _captcha or _next field, so FormSubmit's defaults apply.
+const ENDPOINT = "https://formsubmit.co/rob@syntericrobotics.com";
+const MAX_RESUME_BYTES = 10 * 1024 * 1024;
+
+function resumeError(file) {
+  if (!file) return "";
+  if (!/\.(pdf|doc|docx)$/i.test(file.name)) return "Upload a PDF, DOC, or DOCX resume.";
+  if (file.size <= 0) return "That resume file is empty.";
+  if (file.size > MAX_RESUME_BYTES) return "Resume must be 10 MB or smaller.";
+  return "";
+}
 
 class Component extends DCLogic {
-  state = { submitted: false, error: null, sending: false };
   renderVals() {
     return {
-      submitted: this.state.submitted,
-      open: !this.state.submitted,
-      failed: !!this.state.error,
-      errorText: this.state.error || "",
+      onResume: e => {
+        const input = e.target;
+        if (!input || input.type !== "file") return;
+        const file = input.files && input.files[0];
+        input.setCustomValidity(resumeError(file));
+      },
+      onNotes: e => {
+        const el = e.target;
+        if (!el) return;
+        el.setCustomValidity(el.value.trim() ? "" : "Tell us a bit about yourself.");
+      },
       submit: e => {
-        e.preventDefault();
-        if (this.state.sending) return;
-        const form = (e && e.target && e.target.tagName === "FORM") ? e.target : document.querySelector("form");
-        const payload = { _subject: "Synteric application: CTO", role: ROLE };
-        new FormData(form).forEach((v, k) => { payload[k] = v; });
-        this.setState({ sending: true, error: null });
-        fetch("https://formsubmit.co/ajax/rob@syntericrobotics.com", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(payload)
-        })
-          .then(r => r.json().then(j => ({ ok: r.ok, j }), () => ({ ok: r.ok, j: {} })))
-          .then(res => {
-            // FormSubmit signals success with the STRING "true".
-            if (!res.ok || String(res.j.success) !== "true") throw new Error("send failed");
-            this.setState({ submitted: true, sending: false });
-          })
-          .catch(() => this.setState({ sending: false, error: "COULDN’T SEND. CHECK YOUR CONNECTION AND TRY AGAIN." }));
+        const form = (e && e.target && e.target.tagName === "FORM") ? e.target : null;
+        if (!form) return;
+        form.action = ENDPOINT;
+        form.method = "post";
+        form.enctype = "multipart/form-data";
+        const notes = form.querySelector('textarea[name="notes"]');
+        const resume = form.querySelector('input[name="attachment"]');
+        if (notes) notes.setCustomValidity(notes.value.trim() ? "" : "Tell us a bit about yourself.");
+        if (resume) resume.setCustomValidity(resumeError(resume.files && resume.files[0]));
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          form.reportValidity();
+        }
       }
     };
   }

@@ -98,9 +98,22 @@ with React. Consequences worth knowing:
 `/careers/` renders its list from the `ROLES` array in `careers/index.html`. To add a
 role: append one entry there (`title`, `tag`, `slug`) and create
 `careers/<slug>/index.html` by copying an existing posting. Each posting's apply form
-posts to the same FormSubmit endpoint with its own `_subject`, a `role` field, and an
-empty `_honey` honeypot (FormSubmit discards submissions where it's filled). The
-footer CAREERS link is on every page; it is deliberately not in the header nav.
+goes to the same recipient (`rob@syntericrobotics.com`) with its own `_subject`, a
+`role` field, and an empty `_honey` honeypot (FormSubmit discards submissions where
+it's filled). There is no `_captcha` or `_next` field. The footer CAREERS link is on
+every page; it is deliberately not in the header nav.
+
+Career applications attach a resume, so they do **not** use the JSON AJAX call
+above. FormSubmit's documented file upload is a normal form POST:
+`method="POST"`, `action="https://formsubmit.co/<recipient>"`,
+`enctype="multipart/form-data"`, file input `name="attachment"`. The documented
+limit is 10 MB combined per submission; files are emailed and not stored. The
+AJAX endpoint only documents a JSON body, which cannot carry the file — don't
+switch these forms back to `fetch` + `JSON.stringify`. A valid form is allowed
+to submit natively. Client checks: `required` on name, email, resume, and the
+`notes` textarea, plus `setCustomValidity` for a blank note, a non-PDF/Word
+file, and files over 10 MB. `/request-access/` stays on the AJAX endpoint; it
+does not take a file.
 
 ### Activation status
 
